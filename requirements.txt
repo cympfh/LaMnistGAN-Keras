@@ -1,0 +1,6 @@
+Pillow
+click
+numpy
+scipy
+tensorflow
+keras
