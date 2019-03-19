@@ -1,18 +1,11 @@
-## training mode (newly)
-train:
-	CUDA_VISIBLE_DEVICES=$(shell empty-gpu-device) python lamnistgan.py train --name $(shell date "+%Y-%m-%d-%s")
+## training and testing
+do:
+	CUDA_VISIBLE_DEVICES=$(shell empty-gpu-device) python lamnistgan.py train --name $(shell date "+%Y-%m-%d-%s") --epochs 100
 
-## training mode (resume from a snapshot)
-train-from:
-	CUDA_VISIBLE_DEVICES=$(shell empty-gpu-device) python lamnistgan.py train --name $(shell date "+%Y-%m-%d-%s") --resume $(shell ls -1 snapshots/*.h5|peco)
-
-## testing mode
-test:
-	CUDA_VISIBLE_DEVICES=$(shell empty-gpu-device) python lamnistgan.py test $(shell ls -1 snapshots/*.h5|peco)
-
-## visplot a log
-log:
-		visplot --smoothing 2 -x epoch -y acc,val_acc $(shell ls -1 logs/*.json|peco)
+## clearn all outputs
+clean:
+	rm -rf result
+	rm logs/*.json
 
 .DEFAULT_GOAL := help
 
